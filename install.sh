@@ -29,7 +29,7 @@ if [ "$install_ssh_config" = "" ] || [[ "$install_ssh_config" =~ [Y|y] ]]
 then
   echo -e "\n[!] Creating/overwriting the hacklab SSH config file: $HACKLAB_SSH_CONFIG_FILE_PATH."
   echo -e "Host hacklab
-\tHostName localhost
+\tHostName 192.168.0.107
 \tUser root
 \tPort 2222
 \tDynamicForward 1337" > $HACKLAB_SSH_CONFIG_FILE_PATH
@@ -65,8 +65,11 @@ then
   fi
 fi
 
-echo -e "\n[*] Build and Start Docker service."
-docker compose up -d
+# echo -e "\n[*] Build and Start Docker service."
+# sudo docker compose up -d
+
+echo -e "\n[*] Build Docker image."
+sudo docker build -t hacklab .
 
 echo -e "\n[*] Installation finished!"
 echo "Run 'ssh hacklab' to connect to your lab."
